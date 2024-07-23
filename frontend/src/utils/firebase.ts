@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 const firebaseConfig = {
-    apiKey: "AIzaSyDXNs3Ayn7Iiv1gEwy-6DAGcisPGctocnY",
+    apiKey: process.env.FIREBASE_API_KEY,
     authDomain: "leetcode-clone-fb07d.firebaseapp.com",
     projectId: "leetcode-clone-fb07d",
     storageBucket: "leetcode-clone-fb07d.appspot.com",
