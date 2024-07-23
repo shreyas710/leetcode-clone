@@ -1,13 +1,14 @@
-import './App.css'
-import { Landing } from './components/Landing'
+import "./App.css";
+import { Signin } from "./components/SignIn";
 
 function App() {
-
-  return (
-    <>
-      <Landing/>
-    </>
-  )
+    return (
+        <>
+            <div>
+                <Signin />
+            </div>
+        </>
+    );
 }
 
-export default App
+export default App;
