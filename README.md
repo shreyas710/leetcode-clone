@@ -1,5 +1,5 @@
 # leetcode-clone
 
-Frontend: Next.js
-Backend: TS
-Workers: runs code
+Frontend: Next.js <br/>
+Backend: TS <br/>
+Workers: runs code <br/>
