@@ -1,36 +1,40 @@
-import {
-    getAuth,
-    sendSignInLinkToEmail,
-} from "firebase/auth";
-import { useState } from "react";
-import { app } from "../utils/firebase";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
-const actionCodeSettings = {
-    url: "https://localhost:5173",
-    handleCodeInApp: true,
-};
+const provider = new GoogleAuthProvider();
 
 export const Signin = () => {
-    const auth = getAuth(app);
-    const [email, setEmail] = useState("");
 
     async function onSignIn() {
-        await sendSignInLinkToEmail(auth, email, actionCodeSettings)
-            .then(() => {
-                window.localStorage.setItem("emailForSignIn", email);
-                alert("Email sent");
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential =
+                    GoogleAuthProvider.credentialFromResult(result);
+                if (!credential) return;
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                console.log(user);
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
             })
             .catch((error) => {
-                alert("EMAIL NOT SENT");
+                // Handle Errors here.
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential =
+                    GoogleAuthProvider.credentialFromError(error);
+                // ...
             });
     }
 
     return (
         <div>
-            <input type="email" onChange={(e) => setEmail(e.target.value)} />
-            <button onClick={onSignIn}>Sign up</button>
+            <button onClick={onSignIn}>Login With Google</button>
         </div>
     );
 };
